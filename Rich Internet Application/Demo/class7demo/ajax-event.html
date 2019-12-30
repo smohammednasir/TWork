@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Click Me!</button>
+    <div id="results"></div>
+    <script>
+
+    document.getElementById('btn').addEventListener('click', function(){
+        var myRequest = new XMLHttpRequest();
+
+
+        myRequest.addEventListener('load', function(evt){
+            console.log(evt);
+            var a = JSON.parse(evt.target.responseText);
+            var table = document.createElement('table');
+            for(var i = 0; i < a.length; i++) {
+                console.log(a[i]);
+                var row = document.createElement('tr');
+                row.id = a[i].id;
+                var cellproduct = document.createElement('td');
+                var protext = document.createTextNode(a[i].Product);
+                cellproduct.appendChild(protext);
+                row.appendChild(cellproduct);
+                var cellpr = document.createElement('td');
+                var prtext = document.createTextNode(a[i].Price);
+                cellpr.appendChild(prtext);
+                row.appendChild(cellpr);
+                table.appendChild(row);
+            }
+            document.getElementById('results').appendChild(table);
+        });
+
+
+        myRequest.open('GET', 'http://libertyville.rice.iit.edu/scripts/products.php', true);	
+        
+        myRequest.send();
+
+    }); //end click event btn handler
+    
+    </script>
+</body>
+</html>

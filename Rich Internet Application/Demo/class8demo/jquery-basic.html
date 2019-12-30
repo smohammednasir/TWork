@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#main-btn').click(function(evt){
+				console.log(evt);
+				console.log($('#jHtml').html());
+				$('#jHtml').html('<h2>New HTML</h2>');
+				$('#jHtml').append($('<p>This is the new paragraph.</p>'));
+				$('<h3>Headline 3</h3><p>para 3</p>').appendTo($('#jHtml2'));
+				$('#jHtml2').css('background-color', 'green');
+			});
+
+			$('#box').hover(function(){
+				// hover over
+				$(this).addClass('box-hover');
+			}, function(){
+				// hover out
+				$(this).removeClass('box-hover');
+			});
+
+			
+		}); // end doc ready
+	</script>
+	<style type="text/css">
+		#box {
+			width: 200px;
+			height: 200px;
+			background-color: #ddd;
+		}
+		#box.box-hover {
+			background-color: red;
+			width: 400px;
+			border-radius: 20px;
+		}
+	</style>
+</head>
+<body>
+	<button id="main-btn">Click Me!</button>
+	<div id="box"></div>
+	<div id="jHtml"><p>Starting HTML</p></div>
+	<div id="jHtml2"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

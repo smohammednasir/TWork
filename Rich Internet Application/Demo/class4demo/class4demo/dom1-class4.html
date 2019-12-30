@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>dom1 class 4</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        let controls = document.createElement('div');
+        controls.id = 'controlsWrapper';
+        controls.style.backgroundColor = '#aaa';
+        controls.style.padding = '20px';
+
+        let textIn = document.createElement('input');
+        textIn.setAttribute('type', 'text');
+        textIn.id = 'textIn';
+
+        let textLabel = document.createElement('label');
+        textLabel.appendChild(document.createTextNode('Enter Text: '));
+        textLabel.appendChild(textIn);
+        controls.appendChild(textLabel);
+
+        let colorSelect = document.createElement('select');
+        colorSelect.id = 'colorSelect';
+        let optRed = document.createElement('option');
+        optRed.setAttribute('value', 'red');
+        optRed.appendChild(document.createTextNode('Red'));
+        colorSelect.appendChild(optRed);
+        let optGreen = document.createElement('option');
+        optGreen.setAttribute('value', 'green');
+        optGreen.appendChild(document.createTextNode('Green'));
+        colorSelect.appendChild(optGreen);
+        let optBlue = document.createElement('option');
+        optBlue.setAttribute('value', 'blue');
+        optBlue.appendChild(document.createTextNode('Blue'));
+        colorSelect.appendChild(optBlue);
+        controls.appendChild(colorSelect);
+
+        let saveBtn = document.createElement('button');
+        saveBtn.id = 'saveBtn';
+        saveBtn.appendChild(document.createTextNode('Save'));
+        saveBtn.addEventListener('click', saveHandler, false);
+        controls.appendChild(saveBtn);
+
+        document.getElementById('root').appendChild(controls);
+
+        function saveHandler(){
+            console.log('Save Clicked');
+            let text = document.getElementById('textIn').value.trim();
+            let color = document.getElementById('colorSelect').value;
+            if (text === '') {
+                alert('Text can not be empty!');
+            } else {
+                let item = document.createElement('li');
+                item.appendChild(document.createTextNode(text));
+                item.style.color = color;
+                document.getElementById('list').appendChild(item);
+                document.getElementById('textIn').value = '';
+                document.getElementById('colorSelect').selectedIndex = 0;
+            }
+        }
+
+        let list = document.createElement('ul');
+        list.id = 'list';
+
+        document.getElementById('root').appendChild(list);
+    </script>
+</body>
+</html>
