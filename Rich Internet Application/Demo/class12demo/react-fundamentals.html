@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React Fundamentals</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        let name = "Brian";
+        let email = "bbailey4@iit.edu";
+
+        // React Element
+        const nameElement = React.createElement('h1', null, name);
+
+        // Stateless Functional Component
+        function NameFunctionalComponent(props){
+            return React.createElement('h1', null, props.myname);
+        }
+
+        // Stateless Functional Component - JSX
+        function NameFunctionalComponentJSX(props){
+            return <h1>{props.myname}</h1>;
+        }
+
+        // Class Component - JSX
+        class NameClassComponentJSX extends React.Component {
+            render(){
+                return (
+                    <React.Fragment>
+                        <h1>{this.props.myname}</h1>
+                        <h2>{this.props.myemail}</h2>
+                        <h3>{this.props.subject}</h3>
+                    </React.Fragment>
+                    );
+            }
+        }
+
+        // Class Component
+        class NameClassComponent extends React.Component {
+            render(){
+                return React.createElement('div',null,React.createElement('h1', null, this.props.myname),React.createElement('h2', null, this.props.myemail),React.createElement('h3', null, this.props.subject));
+            }
+        }
+
+        // Wrapper Functional Component - JSX
+        const WrapperComponent = (props) => {
+            return (
+                <div>
+                    <NameClassComponentJSX myname={props.name} myemail={props.email} subject={props.subject} />
+                </div>
+            );
+        };
+
+        // Wrapper Component - JSX
+        class WrapperClassComponentJSX extends React.Component {
+            render(){
+                return (
+                    <div>
+                        <NameClassComponentJSX myname={this.props.name} myemail={this.props.email} subject={this.props.subject} />
+                        <NameFunctionalComponentJSX myname={this.props.name} />
+                    </div>
+                );
+            }
+        }
+
+        // Component with State
+        class ButtonComponent extends React.Component {
+            constructor(props){
+                super(props);
+                this.state = {counter: 0};
+                this.handleButtonClick = this.handleButtonClick.bind(this);
+            }
+
+            handleButtonClick(e){
+                console.log('Clicked');
+                this.setState(
+                    (prevState) => ({counter: prevState.counter + 1})
+                );
+            }
+
+            render(){
+                return (
+                    <div>
+                    <NameFunctionalComponentJSX myname='This is my buttons' />
+                    <button onClick={this.handleButtonClick}>{this.props.text} - {this.state.counter}</button>
+                    </div>
+                    );
+            }
+        }
+
+        // Button Wrapper Component - JSX
+        class ButtonWrapper extends React.Component {
+            render(){
+                return (
+                    <div>
+                        <ButtonComponent text='Button 1' />
+                        <ButtonComponent text='Button 2' />
+                        <ButtonComponent text='Button 3' />
+                    </div>
+                );
+            }
+        }
+
+        // React DOM
+        //ReactDOM.render(nameElement, document.getElementById('root'));
+        //ReactDOM.render(React.createElement(NameFunctionalComponent, {myname: name}), document.getElementById('root'));
+        //ReactDOM.render(<NameFunctionalComponentJSX myname={name} />, document.getElementById('root'));
+        //ReactDOM.render(<NameClassComponentJSX myname={name} myemail={email} subject='JavaScript'/>, document.getElementById('root'));
+        //ReactDOM.render(<NameClassComponent myname={name} myemail={email} subject='JavaScript'/>, document.getElementById('root'));
+        //ReactDOM.render(<WrapperComponent name={name} email={email} subject='JavaScript'/>, document.getElementById('root'));
+        //ReactDOM.render(<WrapperClassComponentJSX name={name} email={email} subject='JavaScript'/>, document.getElementById('root'));
+        //ReactDOM.render(<ButtonComponent text='My Button' />, document.getElementById('root'));
+        ReactDOM.render(<ButtonWrapper />, document.getElementById('root'));
+    </script>
+</body>
+</html>
