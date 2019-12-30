@@ -1,0 +1,23 @@
+{
+    "database-root-password": "root",
+	
+    "database-user-password": "vagrant",
+	
+    "database-access-from-ip": "0.0.0.0",
+	
+    "database-ip": "192.168.33.10",
+	
+    "webserver-ip": "192.168.33.11",
+	
+    "database-name": "comments",
+	
+    "database-user-name": "vagrant",
+	
+	"databasehostname": "192.168.33.10",
+
+    "databaseusername": "vagrant",
+
+    "databaseuserpasswd": "vagrant",
+
+    "databasename": "comments"
+}
